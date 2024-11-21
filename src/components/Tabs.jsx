@@ -22,9 +22,9 @@ function Tabs(props) {
             onClick={() => setSelectedTab(tab)}
           >
             {tab} (
-            {tab === "all"
+            {tab === "All"
               ? tasks.length
-              : tab === "open"
+              : tab === "Open"
               ? openTasks.length
               : completedTasks.length}
             )

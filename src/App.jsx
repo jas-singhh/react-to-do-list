@@ -20,6 +20,13 @@ function App() {
     setTasks(taskObj);
   }
 
+  function handleDeleteTask(index) {
+    // remove the task at the given index from the tasks array
+    const taskObj = tasks.filter((task, taskIndex) => taskIndex !== index);
+
+    setTasks(taskObj);
+  }
+
   return (
     <>
       <div className="w-screen h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
@@ -29,7 +36,11 @@ function App() {
           selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}
         />
-        <ToDoList selectedTab={selectedTab} tasks={tasks} />
+        <ToDoList
+          handleDeleteTask={handleDeleteTask}
+          selectedTab={selectedTab}
+          tasks={tasks}
+        />
         <TodoInput handleAddTask={handleAddTask} />
       </div>
     </>
