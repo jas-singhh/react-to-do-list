@@ -2,24 +2,24 @@ import React from "react";
 import TodoCard from "./TodoCard";
 
 function TodoList(props) {
-  const { tasks, selectedTab, handleDeleteTask } = props;
+  const { tasks, selectedTab, handleDeleteTask, handleCompleteTask } = props;
 
-  const filteredList = tasks.filter(
-    (task) =>
-      selectedTab === "All" ||
-      (selectedTab === "Open" && !task.completed) ||
-      (selectedTab === "Completed" && task.completed)
-  );
+  const filterTodosList =
+    selectedTab === "All"
+      ? tasks
+      : selectedTab === "Completed"
+      ? tasks.filter((val) => val.completed)
+      : tasks.filter((val) => !val.completed);
 
   return (
     <>
-      {filteredList.map((task, taskIndex) => {
+      {filterTodosList.map((task, taskIndex) => {
         return (
           <TodoCard
             key={taskIndex}
-            taskIndex={taskIndex}
+            taskIndex={tasks.findIndex((val) => val.task === task.task)}
+            {...props}
             task={task}
-            handleDeleteTask={handleDeleteTask}
           />
         );
       })}

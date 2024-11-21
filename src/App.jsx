@@ -6,11 +6,10 @@ import { useState } from "react";
 
 function App() {
   const [tasks, setTasks] = useState([
-    { task: "Welcome to the ToDo App", completed: true },
+    { task: "Welcome to the ToDo App", completed: false },
   ]);
 
   const [selectedTab, setSelectedTab] = useState("Open");
-  console.log("tab", selectedTab);
 
   function handleAddTask(task) {
     if (task === "") return;
@@ -20,11 +19,20 @@ function App() {
     setTasks(taskObj);
   }
 
-  function handleDeleteTask(index) {
-    // remove the task at the given index from the tasks array
-    const taskObj = tasks.filter((task, taskIndex) => taskIndex !== index);
+  function handleCompleteTask(index) {
+    const newList = [...tasks];
 
-    setTasks(taskObj);
+    newList[index].completed = true;
+
+    setTasks(newList);
+  }
+
+  function handleDeleteTask(index) {
+    const newList = [...tasks];
+
+    newList.splice(index, 1);
+
+    setTasks(newList);
   }
 
   return (
@@ -38,6 +46,7 @@ function App() {
         />
         <ToDoList
           handleDeleteTask={handleDeleteTask}
+          handleCompleteTask={handleCompleteTask}
           selectedTab={selectedTab}
           tasks={tasks}
         />
