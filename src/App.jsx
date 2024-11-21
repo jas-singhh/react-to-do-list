@@ -9,6 +9,9 @@ function App() {
     { task: "Welcome to the ToDo App", completed: true },
   ]);
 
+  const [selectedTab, setSelectedTab] = useState("Open");
+  console.log("tab", selectedTab);
+
   function handleAddTask(task) {
     if (task === "") return;
 
@@ -21,8 +24,12 @@ function App() {
     <>
       <div className="w-screen h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
         <Header tasks={tasks} />
-        <Tabs tasks={tasks} />
-        <ToDoList tasks={tasks} />
+        <Tabs
+          tasks={tasks}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+        />
+        <ToDoList selectedTab={selectedTab} tasks={tasks} />
         <TodoInput handleAddTask={handleAddTask} />
       </div>
     </>
