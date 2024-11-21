@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import Tabs from "./components/Tabs";
 import ToDoList from "./components/ToDoList";
 import TodoInput from "./components/ToDoInput";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -17,6 +17,7 @@ function App() {
     const taskObj = [...tasks, { task: task, completed: false }];
 
     setTasks(taskObj);
+    handleSaveTasks(taskObj);
   }
 
   function handleCompleteTask(index) {
@@ -25,6 +26,7 @@ function App() {
     newList[index].completed = true;
 
     setTasks(newList);
+    handleSaveTasks(newList);
   }
 
   function handleDeleteTask(index) {
@@ -33,7 +35,20 @@ function App() {
     newList.splice(index, 1);
 
     setTasks(newList);
+    handleSaveTasks(newList);
   }
+
+  function handleSaveTasks(tasks) {
+    if (localStorage) {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+  }
+
+  useEffect(() => {
+    if (localStorage && localStorage.getItem("tasks")) {
+      setTasks(JSON.parse(localStorage.getItem("tasks")));
+    }
+  }, []);
 
   return (
     <>
