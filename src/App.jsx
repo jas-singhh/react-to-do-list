@@ -1,7 +1,7 @@
 import Header from "./components/Header";
 import Tabs from "./components/Tabs";
-import ToDoList from "./components/ToDoList";
-import TodoInput from "./components/ToDoInput";
+import TodoList from "./components/TodoList";
+import TodoInput from "./components/TodoInput";
 import { useState, useEffect } from "react";
 
 function App() {
@@ -59,7 +59,7 @@ function App() {
           selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}
         />
-        <ToDoList
+        <TodoList
           handleDeleteTask={handleDeleteTask}
           handleCompleteTask={handleCompleteTask}
           selectedTab={selectedTab}
